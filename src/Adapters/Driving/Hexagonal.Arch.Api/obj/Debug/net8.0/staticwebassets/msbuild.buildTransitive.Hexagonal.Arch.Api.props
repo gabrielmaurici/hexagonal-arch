@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/Hexagonal.Arch.Api.props" />
+</Project>
