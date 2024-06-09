@@ -6,7 +6,7 @@ namespace Hexagonal.Arch.Domain.ValueObjects;
 
 public class Address
 {
-    public Address(string cep, string? street, string? district)
+    public Address(string cep, string? street = null, string? district = null)
     {
         Cep = cep;
         Street = street;
