@@ -9,6 +9,7 @@ obj/
 .mono
 
 ### VisualStudioCode ###
+.vs/*
 .vscode/*
 !.vscode/tasks.json
 !.vscode/launch.json
