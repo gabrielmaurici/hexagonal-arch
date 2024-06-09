@@ -11,7 +11,7 @@ public class Cpf
         Validate();
     }
 
-    public string Document { get; set; } = null!;
+    public string Document { get; private set; } = null!;
 
     private void Validate() 
     {

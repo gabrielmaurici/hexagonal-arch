@@ -20,4 +20,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Hexagonal.Arch.Domain\Hexagonal.Arch.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
