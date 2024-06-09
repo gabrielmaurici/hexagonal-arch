@@ -5,18 +5,18 @@ namespace Hexagonal.Arch.Domain.Entities;
 
 public class Customer
 {
-    public Customer(string name, short? age, Cpf document, Address address)
+    public Customer(string name, short? age, Cpf cpf, Address address)
     {
         Name = name;
         Age = age;
-        Document = document;
+        Cpf = cpf;
         Address = address;
         Validate();
     }
 
     public string Name { get; private set; } = null!;
     public short? Age { get; set; }
-    public Cpf Document { get; private set; } = null!;
+    public Cpf Cpf { get; private set; } = null!;
     public Address Address { get; private set; } = null!;
 
     private void Validate()
@@ -24,8 +24,8 @@ public class Customer
         if (string.IsNullOrWhiteSpace(Name))
             throw new NullNameException();
 
-        if (Document == null)
-            throw new NullDocumentException();
+        if (Cpf == null)
+            throw new NullCpfException();
 
         if (Address == null)
             throw new NullAddressException();
