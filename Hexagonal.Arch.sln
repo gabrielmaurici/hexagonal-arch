@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Infra.Integr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Infra.Db", "src\Adapters\Driven\Hexagonal.Arch.Infra.Db\Hexagonal.Arch.Infra.Db.csproj", "{98FD7467-535D-4EC5-9AFF-F14341667415}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Test.Domain", "src\Tests\Hexagonal.Arch.Test.Domain\Hexagonal.Arch.Test.Domain.csproj", "{3564E191-187D-4742-B209-C4F971BB15A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Test.Application", "src\Tests\Hexagonal.Arch.Test.Application\Hexagonal.Arch.Test.Application.csproj", "{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +64,13 @@ Global
 		{948674F0-3B32-4E6B-927B-B53318D5CB9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{948674F0-3B32-4E6B-927B-B53318D5CB9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{948674F0-3B32-4E6B-927B-B53318D5CB9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3564E191-187D-4742-B209-C4F971BB15A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3564E191-187D-4742-B209-C4F971BB15A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3564E191-187D-4742-B209-C4F971BB15A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3564E191-187D-4742-B209-C4F971BB15A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
