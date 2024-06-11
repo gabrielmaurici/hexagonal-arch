@@ -27,7 +27,6 @@ namespace Hexagonal.Arch.Test.Domain.ValueObjects
             Assert.Throws<InvalidCepFormatException>(() => new Address(cep));
         }
 
-
         [Fact(DisplayName = "Throw null CEP exception when CEP is null or empty")]
         public void CepNullorEmpty_WhenCepIsNullOrEmpty_ThrowInvalidCepFormatException()
         {

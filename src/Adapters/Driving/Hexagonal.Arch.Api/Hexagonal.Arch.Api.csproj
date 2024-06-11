@@ -11,4 +11,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Driven\Hexagonal.Arch.Infra.Db\Hexagonal.Arch.Infra.Db.csproj" />
+    <ProjectReference Include="..\..\Driven\Hexagonal.Arch.Infra.IntegrationViaCepApi\Hexagonal.Arch.Infra.IntegrationViaCepApi.csproj" />
+  </ItemGroup>
+
 </Project>

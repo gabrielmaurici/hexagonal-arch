@@ -20,7 +20,6 @@ namespace Hexagonal.Arch.Test.Domain.Entities
             var name = "Joãozinho";
             short? age = 18;
             var customer = new Customer(name, age, cpf, address);
-
     
             Assert.Equal(document, customer.Cpf.Document);
 
@@ -78,5 +77,4 @@ namespace Hexagonal.Arch.Test.Domain.Entities
             Assert.Throws<NullAddressException>(() => new Customer(name, age, cpf, address!));
         }
     }
-    
 }
