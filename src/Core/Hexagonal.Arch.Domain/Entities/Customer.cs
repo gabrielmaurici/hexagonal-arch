@@ -5,8 +5,9 @@ namespace Hexagonal.Arch.Domain.Entities;
 
 public class Customer
 {
-    public Customer(string name, short? age, Cpf cpf, Address address)
+    public Customer(int id,string name, short? age, Cpf cpf, Address address)
     {
+        Id = id;
         Name = name;
         Age = age;
         Cpf = cpf;
@@ -14,6 +15,7 @@ public class Customer
         Validate();
     }
 
+    public int Id { get; private set; }
     public string Name { get; private set; } = null!;
     public short? Age { get; set; }
     public Cpf Cpf { get; private set; } = null!;
