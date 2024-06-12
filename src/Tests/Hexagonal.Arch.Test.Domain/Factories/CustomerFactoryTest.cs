@@ -1,8 +1,6 @@
-using System.Data.Common;
 using Hexagonal.Arch.Domain.Entities;
 using Hexagonal.Arch.Domain.Factories;
 using Hexagonal.Arch.Domain.ValueObjects;
-using Microsoft.VisualBasic;
 
 namespace Hexagonal.Arch.Test.Domain.Factories;
 

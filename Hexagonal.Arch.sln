@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Test.Domain"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Test.Application", "src\Tests\Hexagonal.Arch.Test.Application\Hexagonal.Arch.Test.Application.csproj", "{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Test.Infra.Db", "src\Tests\Hexagonal.Arch.Test.Infra.Db\Hexagonal.Arch.Test.Infra.Db.csproj", "{67239D7D-5548-4DC5-9EC0-665F56267C73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,9 @@ Global
 		{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{255ABAFE-EDFC-49BD-A4AD-A16E71AC89DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67239D7D-5548-4DC5-9EC0-665F56267C73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67239D7D-5548-4DC5-9EC0-665F56267C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67239D7D-5548-4DC5-9EC0-665F56267C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67239D7D-5548-4DC5-9EC0-665F56267C73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

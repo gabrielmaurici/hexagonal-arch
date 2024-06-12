@@ -1,7 +1,6 @@
 using Hexagonal.Arch.Domain.Entities;
 using Hexagonal.Arch.Domain.Exceptions;
 using Hexagonal.Arch.Domain.ValueObjects;
-using Microsoft.VisualBasic;
 
 namespace Hexagonal.Arch.Test.Domain.Entities
 {
