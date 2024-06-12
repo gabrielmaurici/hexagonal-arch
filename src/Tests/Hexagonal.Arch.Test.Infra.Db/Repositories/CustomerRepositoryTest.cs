@@ -1,4 +1,5 @@
 using Hexagonal.Arch.Domain.Entities;
+using Hexagonal.Arch.Domain.Exceptions;
 using Hexagonal.Arch.Domain.Factories;
 using Hexagonal.Arch.Domain.ValueObjects;
 using Hexagonal.Arch.Infra.Db.Context;
@@ -51,6 +52,15 @@ public class CustomerRepositoryTest
         Assert.Equal(customerEfModel.Cep, customerDb.Address.Cep);
         Assert.Equal(customerEfModel.Street, customerDb.Address.Street);
         Assert.Equal(customerEfModel.District, customerDb.Address.District);
+    }
+
+    [Fact(DisplayName = "Throw CustomerNotFoundException when customer not exists in db")]
+    public async void CustomerNotExists_WhenCustomerNotExistsInDb_ThrowCustomerNotFoundException()
+    {
+        var contextMock = GetContextMock();
+        var customerRepositoryMock = GetCustomerRepositoryMock(contextMock);
+
+        await Assert.ThrowsAsync<CustomerNotFoundException>(async () => await customerRepositoryMock.GetByIdAsync(0));
     }
 
     public static HexagonalContext GetContextMock() 
