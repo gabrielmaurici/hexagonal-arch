@@ -4,7 +4,7 @@ using Hexagonal.Arch.Domain.Ports;
 
 namespace Hexagonal.Arch.Infra.IntegrationViaCepApi;
 
-public class IntegrationViaCepApi(HttpClient client) : IIntegrationViaCepApi
+public class IntegrationViaCepApiService(HttpClient client) : IIntegrationViaCepApi
 {
     public async Task<string> GetAddressByCep(string cep)
     {

@@ -11,7 +11,7 @@ public static class IntegrationViaCepApiExtensions
         var urlViaCepApi = configuration.GetValue<string>("via-cep-api") ??
             throw new NullReferenceException("Url ViaCepApi não encontrada");
 
-        services.AddHttpClient<IIntegrationViaCepApi, IntegrationViaCepApi>(client => {
+        services.AddHttpClient<IIntegrationViaCepApi, IntegrationViaCepApiService>(client => {
             client.BaseAddress = new Uri(urlViaCepApi);
         });
 
