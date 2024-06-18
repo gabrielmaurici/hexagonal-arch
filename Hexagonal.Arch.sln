@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Test.Infra.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Test.Infra.IntegrationViaCepApi", "src\Tests\Hexagonal.Arch.Test.Infra.IntegrationViaCepApi\Hexagonal.Arch.Test.Infra.IntegrationViaCepApi.csproj", "{116DF63B-12B7-47FF-A5E6-90CCDE180B1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexagonal.Arch.Infra.IntegrationAwsS3", "src\Adapters\Driven\Hexagonal.Arch.Infra.IntegrationAwsS3\Hexagonal.Arch.Infra.IntegrationAwsS3.csproj", "{B44EE3B8-8563-47DD-9BAA-48767EC90E47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,5 +86,9 @@ Global
 		{116DF63B-12B7-47FF-A5E6-90CCDE180B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{116DF63B-12B7-47FF-A5E6-90CCDE180B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{116DF63B-12B7-47FF-A5E6-90CCDE180B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B44EE3B8-8563-47DD-9BAA-48767EC90E47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B44EE3B8-8563-47DD-9BAA-48767EC90E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B44EE3B8-8563-47DD-9BAA-48767EC90E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B44EE3B8-8563-47DD-9BAA-48767EC90E47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
