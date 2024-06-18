@@ -38,8 +38,8 @@ public class IntegrationViaCepApiTest
         Assert.Equal(responseExpectSerialize, address);
     }
 
-    [Fact(DisplayName = "When CEP is invalid, return status code 400 and throw InvalidCepFormatException")]
-    public async void CepIsInvalid_WhenCepIsInvalid_Returns400AndThrowInvalidCepFormatException()
+    [Fact(DisplayName = "When CEP is invalid, return status code 400 and throws InvalidCepFormatException")]
+    public async void CepIsInvalid_WhenCepIsInvalid_Returns400AndThrowsInvalidCepFormatException()
     {
         var mockMessageHandler = new Mock<HttpMessageHandler>();
         mockMessageHandler.Protected()
@@ -60,8 +60,8 @@ public class IntegrationViaCepApiTest
         await Assert.ThrowsAsync<InvalidCepFormatException>(() => integrationViaCepApiService.GetAddressByCep("01000"));
     }
 
-    [Fact(DisplayName = "When CEP is invalid, return status code 400 and throw InvalidCepFormatException")]
-    public async void ViaCepApiIsOut_WhenViaCepApiIsOut_Returns500AndThrowException()
+    [Fact(DisplayName = "When ViaCepApi is down, return status code 500 and throws Exception")]
+    public async void ViaCepApiIsDown_WhenViaCepApiIsDown_Returns500AndThrowsException()
     {
         var mockMessageHandler = new Mock<HttpMessageHandler>();
         mockMessageHandler.Protected()
