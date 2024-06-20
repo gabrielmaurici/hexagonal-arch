@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Net.Mime;
 using Hexagonal.Arch.Domain.Exceptions;
 using Hexagonal.Arch.Domain.Models;
 using Hexagonal.Arch.Domain.Ports;
@@ -23,7 +22,7 @@ public class IntegrationViaCepApiService(HttpClient client) : IIntegrationViaCep
                 _ => new Exception("Erro ao consultar CEP do cliente")
             };
         }
-        
+
         var content = await response.Content.ReadAsStringAsync();
         var addressAwsModel = JsonConvert.DeserializeObject<AddressAwsS3Model>(content)!;
 
