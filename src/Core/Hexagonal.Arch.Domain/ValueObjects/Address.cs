@@ -1,6 +1,5 @@
-
-using System.Text.RegularExpressions;
 using Hexagonal.Arch.Domain.Exceptions;
+using Hexagonal.Arch.Domain.Helpers;
 
 namespace Hexagonal.Arch.Domain.ValueObjects;
 
@@ -23,11 +22,6 @@ public class Address
         if (string.IsNullOrWhiteSpace(Cep))
             throw new NullCepException();
 
-        string patternCepFormat = @"^\d{5}-\d{3}$";
-        Regex regex = new(patternCepFormat);
-
-        var formatValid = regex.IsMatch(Cep);
-        if (!formatValid)
-            throw new InvalidCepFormatException();
+        CepFormatHelper.Validate(Cep);
     }
 }
