@@ -1,5 +1,7 @@
 ﻿using Hexagonal.Arch.Domain.Dtos;
+using Hexagonal.Arch.Domain.Factories;
 using Hexagonal.Arch.Domain.Helpers;
+using Hexagonal.Arch.Domain.Models;
 using Hexagonal.Arch.Domain.Ports;
 using Hexagonal.Arch.Domain.ValueObjects;
 
@@ -10,20 +12,28 @@ public class CreateCustomerService(
     IIntegrationAwsS3Service integrationAwsS3Service,
     IIntegrationViaCepApiService integrationViaCepApiService) : ICreateCustomerService
 {
-    public async Task Create(CreateCustomerDto customer)
+    public async Task Create(CreateCustomerDto customerDto)
     {
-        CepFormatHelper.Validate(customer.Cep);
+        CepFormatHelper.Validate(customerDto.Cep);
         Address address;
 
-        var addressS3 = await integrationAwsS3Service.GetAddressByCep(customer.Cep);
-        if (addressS3 != null) 
+        var addressAwsS3Cache = await integrationAwsS3Service.GetAddressByCep(customerDto.Cep);
+        if (addressAwsS3Cache == null) 
         {
-            // address = new(addressS3.Cep, addressS3.Logradouro, addressS3.Bairro);
+            var addressViaCep = await integrationViaCepApiService.GetAddressByCep(customerDto.Cep);
+            var adressAwsS3Model = new AddressAwsS3Model(addressViaCep.Cep!, addressViaCep.Logradouro!, addressViaCep.Bairro!);
+            await integrationAwsS3Service.UploadCep(adressAwsS3Model);
+
+            address = new(addressViaCep.Cep!, addressViaCep.Logradouro, addressViaCep.Bairro);
         }
         else
         {
-            var addressViaCep = await integrationViaCepApiService.GetAddressByCep(customer.Cep);
-
+            address = new(addressAwsS3Cache.Cep, addressAwsS3Cache.Street, addressAwsS3Cache.District);
         }
+
+        var cpf = new Cpf(customerDto.Cpf);
+
+        var customer = CustomerFactory.Create(customerDto.Name, customerDto.Age, cpf, address);
+        await customerRepository.CreateAsync(customer);
     }
 }
