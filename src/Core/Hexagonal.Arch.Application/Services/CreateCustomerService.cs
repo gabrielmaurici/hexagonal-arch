@@ -17,12 +17,12 @@ public class CreateCustomerService(
         CepFormatHelper.Validate(customerDto.Cep);
         Address address;
 
-        var addressAwsS3Cache = await integrationAwsS3Service.GetAddressByCep(customerDto.Cep);
+        var addressAwsS3Cache = await integrationAwsS3Service.GetAddressByCepAsync(customerDto.Cep);
         if (addressAwsS3Cache == null) 
         {
             var addressViaCep = await integrationViaCepApiService.GetAddressByCep(customerDto.Cep);
             var adressAwsS3Model = new AddressAwsS3Model(addressViaCep.Cep!, addressViaCep.Logradouro!, addressViaCep.Bairro!);
-            await integrationAwsS3Service.UploadCep(adressAwsS3Model);
+            await integrationAwsS3Service.UploadCepAsync(adressAwsS3Model);
 
             address = new(addressViaCep.Cep!, addressViaCep.Logradouro, addressViaCep.Bairro);
         }
