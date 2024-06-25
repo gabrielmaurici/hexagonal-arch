@@ -13,12 +13,13 @@ public class IntegrationViaCepApiTest
     [Fact(DisplayName = "When CEP is valid, return status code 200 and string with address")]
     public async void CepIsVlaid_WhenCepIsValid_Returns200WithAddress()
     {
-        var responseAddressAwsModel = new AddressAwsS3Model(
-            Cep: "01001-000",
-            Logradouro: "Praça da Sé",
-            Bairro: "Sé" 
-        );
-        var responseExpectSerialize = JsonSerializer.Serialize(responseAddressAwsModel);
+        var responseAddresViaCepModel = new AddressViaCepModel
+        {
+            Cep = "01001-000",
+            Logradouro = "Praça da Sé",
+            Bairro = "Sé" 
+        };
+        var responseExpectSerialize = JsonSerializer.Serialize(responseAddresViaCepModel);
 
         var mockMessageHandler = new Mock<HttpMessageHandler>();
         mockMessageHandler.Protected()
@@ -34,9 +35,39 @@ public class IntegrationViaCepApiTest
         };
         
         var integrationViaCepApiService = new IntegrationViaCepApiService(client);
-        var addressAwsS3Model = await integrationViaCepApiService.GetAddressByCep("01001-000");
+        var addressViaCepModel = await integrationViaCepApiService.GetAddressByCep("01001-000");
 
-        Assert.Equal(responseAddressAwsModel, addressAwsS3Model);
+        Assert.Equal(responseAddresViaCepModel.Erro, addressViaCepModel.Erro);
+        Assert.Equal(responseAddresViaCepModel.Cep, addressViaCepModel.Cep);
+        Assert.Equal(responseAddresViaCepModel.Logradouro, addressViaCepModel.Logradouro);
+        Assert.Equal(responseAddresViaCepModel.Bairro, addressViaCepModel.Bairro);
+    }
+
+    [Fact(DisplayName = "When CEP is valid but not found in ViaCepApi, throws CepNotFoundException")]
+    public async void CepIsVlaid_WhenCepIsValidButNotFoundInViaCepApi_ThrowsCepNotFoundException()
+    {
+        var responseAddressViaCepModel = new AddressViaCepModel
+        {
+            Erro = "true"
+        };
+        var responseExpectSerialize = JsonSerializer.Serialize(responseAddressViaCepModel);
+
+        var mockMessageHandler = new Mock<HttpMessageHandler>();
+        mockMessageHandler.Protected()
+            .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(responseExpectSerialize)
+            });
+
+        var client = new HttpClient(mockMessageHandler.Object) 
+        { 
+            BaseAddress = new Uri("https://viacep.com.br/")
+        };
+        
+        var integrationViaCepApiService = new IntegrationViaCepApiService(client);
+
+        await Assert.ThrowsAsync<CepNotFoundException>(() => integrationViaCepApiService.GetAddressByCep("11111-111"));
     }
 
     [Fact(DisplayName = "When CEP is invalid, return status code 400 and throws InvalidCepFormatException")]

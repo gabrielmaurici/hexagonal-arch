@@ -8,7 +8,7 @@ namespace Hexagonal.Arch.Infra.IntegrationViaCepApi;
 
 public class IntegrationViaCepApiService(HttpClient client) : IIntegrationViaCepApiService
 {
-    public async Task<AddressAwsS3Model> GetAddressByCep(string cep)
+    public async Task<AddressViaCepModel> GetAddressByCep(string cep)
     {
         var resource = $"ws/{cep}/json/";
         var request = new HttpRequestMessage(HttpMethod.Get, client.BaseAddress + resource);
@@ -24,8 +24,11 @@ public class IntegrationViaCepApiService(HttpClient client) : IIntegrationViaCep
         }
 
         var content = await response.Content.ReadAsStringAsync();
-        var addressAwsModel = JsonConvert.DeserializeObject<AddressAwsS3Model>(content)!;
+        var addressViaCepModel = JsonConvert.DeserializeObject<AddressViaCepModel>(content)!;
 
-        return addressAwsModel;
+        if (addressViaCepModel.Erro == "true")
+            throw new CepNotFoundException();
+
+        return addressViaCepModel;
     }
 }

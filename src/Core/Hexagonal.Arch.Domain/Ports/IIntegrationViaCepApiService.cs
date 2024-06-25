@@ -4,5 +4,5 @@ namespace Hexagonal.Arch.Domain.Ports;
 
 public interface IIntegrationViaCepApiService
 {
-    Task<AddressAwsS3Model> GetAddressByCep(string cep);    
+    Task<AddressViaCepModel> GetAddressByCep(string cep);    
 }
