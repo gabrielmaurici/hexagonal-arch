@@ -8,7 +8,7 @@ namespace Hexagonal.Arch.Infra.IntegrationViaCepApi;
 
 public class IntegrationViaCepApiService(HttpClient client) : IIntegrationViaCepApiService
 {
-    public async Task<AddressViaCepModel> GetAddressByCep(string cep)
+    public async Task<AddressViaCepModel> GetAddressByCepAsync(string cep)
     {
         var resource = $"ws/{cep}/json/";
         var request = new HttpRequestMessage(HttpMethod.Get, client.BaseAddress + resource);

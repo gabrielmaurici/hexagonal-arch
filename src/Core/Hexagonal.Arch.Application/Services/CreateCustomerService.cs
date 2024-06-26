@@ -20,7 +20,7 @@ public class CreateCustomerService(
         var addressAwsS3Cache = await integrationAwsS3Service.GetAddressByCepAsync(customerDto.Cep);
         if (addressAwsS3Cache == null) 
         {
-            var addressViaCep = await integrationViaCepApiService.GetAddressByCep(customerDto.Cep);
+            var addressViaCep = await integrationViaCepApiService.GetAddressByCepAsync(customerDto.Cep);
             var adressAwsS3Model = new AddressAwsS3Model(addressViaCep.Cep!, addressViaCep.Logradouro!, addressViaCep.Bairro!);
             await integrationAwsS3Service.UploadCepAsync(adressAwsS3Model);
 

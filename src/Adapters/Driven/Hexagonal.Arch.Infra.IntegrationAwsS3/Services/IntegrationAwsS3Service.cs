@@ -23,7 +23,7 @@ public class IntegrationAwsS3Service : IIntegrationAwsS3Service
         _client = new AmazonS3Client(credentials, Amazon.RegionEndpoint.APNortheast1);
     }
 
-    public async Task<AddressAwsS3Model> GetAddressByCepAsync(string cep)
+    public async Task<AddressAwsS3Model?> GetAddressByCepAsync(string cep)
     {
         var request = new GetObjectRequest
         {
@@ -38,7 +38,7 @@ public class IntegrationAwsS3Service : IIntegrationAwsS3Service
         response.Dispose();
         streamReader.Dispose();
 
-        var addresAwsS3Model = JsonConvert.DeserializeObject<AddressAwsS3Model>(contet)!;
+        var addresAwsS3Model = JsonConvert.DeserializeObject<AddressAwsS3Model>(contet);
         return addresAwsS3Model;
     }
 

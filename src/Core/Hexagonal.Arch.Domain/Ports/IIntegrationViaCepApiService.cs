@@ -4,5 +4,5 @@ namespace Hexagonal.Arch.Domain.Ports;
 
 public interface IIntegrationViaCepApiService
 {
-    Task<AddressViaCepModel> GetAddressByCep(string cep);    
+    Task<AddressViaCepModel> GetAddressByCepAsync(string cep);    
 }
