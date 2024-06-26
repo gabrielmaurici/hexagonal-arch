@@ -12,7 +12,7 @@ public class CreateCustomerService(
     IIntegrationAwsS3Service integrationAwsS3Service,
     IIntegrationViaCepApiService integrationViaCepApiService) : ICreateCustomerService
 {
-    public async Task Create(CreateCustomerDto customerDto)
+    public async Task CreateAsync(CreateCustomerDto customerDto)
     {
         CepFormatHelper.Validate(customerDto.Cep);
         Address address;
@@ -32,7 +32,6 @@ public class CreateCustomerService(
         }
 
         var cpf = new Cpf(customerDto.Cpf);
-
         var customer = CustomerFactory.Create(customerDto.Name, customerDto.Age, cpf, address);
         await customerRepository.CreateAsync(customer);
     }

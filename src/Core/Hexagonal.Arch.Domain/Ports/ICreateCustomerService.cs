@@ -4,5 +4,5 @@ namespace Hexagonal.Arch.Domain.Ports;
 
 public interface ICreateCustomerService
 {
-    Task Create(CreateCustomerDto customer);
+    Task CreateAsync(CreateCustomerDto customer);
 }
