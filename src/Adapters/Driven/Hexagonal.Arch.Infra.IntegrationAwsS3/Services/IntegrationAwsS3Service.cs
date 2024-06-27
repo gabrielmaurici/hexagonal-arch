@@ -16,30 +16,37 @@ public class IntegrationAwsS3Service : IIntegrationAwsS3Service
 
     public IntegrationAwsS3Service(IConfiguration configuration)
     {
-        var awsAccessKey = configuration.GetValue<string>("$aws_access_key");
-        var awsSecretAccessKey = configuration.GetValue<string>("$aws_secret_access_key");
-
+        var awsAccessKey = configuration.GetValue<string>("aws_access_key");
+        var awsSecretAccessKey = configuration.GetValue<string>("aws_secret_access_key");
+        
         var credentials = new BasicAWSCredentials(awsAccessKey, awsSecretAccessKey);
         _client = new AmazonS3Client(credentials, Amazon.RegionEndpoint.USEast1);
     }
 
     public async Task<AddressAwsS3Model?> GetAddressByCepAsync(string cep)
     {
-        var request = new GetObjectRequest
+        try
+        {            
+            var request = new GetObjectRequest
+            {
+                BucketName = bucketName,
+                Key = cep            
+            };
+
+            using var response = await _client.GetObjectAsync(request);
+            using var streamReader = new StreamReader(response.ResponseStream);
+            var contet = await streamReader.ReadToEndAsync();
+
+            response.Dispose();
+            streamReader.Dispose();
+
+            var addressAwsS3Model = JsonConvert.DeserializeObject<AddressAwsS3Model>(contet);
+            return addressAwsS3Model;
+        }
+        catch (AmazonS3Exception)
         {
-            BucketName = bucketName,
-            Key = cep            
-        };
-
-        using var response = await _client.GetObjectAsync(request);
-        using var streamReader = new StreamReader(response.ResponseStream);
-        var contet = await streamReader.ReadToEndAsync();
-
-        response.Dispose();
-        streamReader.Dispose();
-
-        var addresAwsS3Model = JsonConvert.DeserializeObject<AddressAwsS3Model>(contet);
-        return addresAwsS3Model;
+            return null;
+        }
     }
 
     public async Task UploadCepAsync(AddressAwsS3Model address)

@@ -11,7 +11,14 @@ public static class CustomerEndpoints
             await createCustomerService.CreateAsync(customer);
             return TypedResults.Created();
         })
-        .WithName("Customers")
+        .WithName("CreateCustomer")
+        .WithOpenApi();
+
+        endpoints.MapGet("customers/{id}", async (int id, IGetCustomerService getCustomerService) => {
+
+            return TypedResults.Ok(await getCustomerService.GetAsync(id));
+        })
+        .WithName("GetCustomer")
         .WithOpenApi();
     }
 }
