@@ -12,7 +12,7 @@ namespace Hexagonal.Arch.Infra.IntegrationAwsS3.Services;
 public class IntegrationAwsS3Service : IIntegrationAwsS3Service
 {
     private readonly AmazonS3Client _client;
-    private const string bucketName = "hexagonal-arch-via-cep";
+    private const string bucketName = "hexagonal-arch-ceps";
 
     public IntegrationAwsS3Service(IConfiguration configuration)
     {
@@ -20,7 +20,7 @@ public class IntegrationAwsS3Service : IIntegrationAwsS3Service
         var awsSecretAccessKey = configuration.GetValue<string>("$aws_secret_access_key");
 
         var credentials = new BasicAWSCredentials(awsAccessKey, awsSecretAccessKey);
-        _client = new AmazonS3Client(credentials, Amazon.RegionEndpoint.APNortheast1);
+        _client = new AmazonS3Client(credentials, Amazon.RegionEndpoint.USEast1);
     }
 
     public async Task<AddressAwsS3Model?> GetAddressByCepAsync(string cep)

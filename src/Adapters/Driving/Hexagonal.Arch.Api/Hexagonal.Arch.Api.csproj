@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Hexagonal.Arch.Application\Hexagonal.Arch.Application.csproj" />
     <ProjectReference Include="..\..\Driven\Hexagonal.Arch.Infra.Db\Hexagonal.Arch.Infra.Db.csproj" />
+    <ProjectReference Include="..\..\Driven\Hexagonal.Arch.Infra.IntegrationAwsS3\Hexagonal.Arch.Infra.IntegrationAwsS3.csproj" />
     <ProjectReference Include="..\..\Driven\Hexagonal.Arch.Infra.IntegrationViaCepApi\Hexagonal.Arch.Infra.IntegrationViaCepApi.csproj" />
   </ItemGroup>
 

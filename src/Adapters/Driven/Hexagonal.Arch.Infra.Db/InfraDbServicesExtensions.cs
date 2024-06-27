@@ -1,4 +1,6 @@
+using Hexagonal.Arch.Domain.Ports;
 using Hexagonal.Arch.Infra.Db.Context;
+using Hexagonal.Arch.Infra.Db.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,8 @@ namespace Hexagonal.Arch.Infra.Db
         {   
             services.AddDbContext<HexagonalContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("hexagonal--db")));
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             return services;
         }
