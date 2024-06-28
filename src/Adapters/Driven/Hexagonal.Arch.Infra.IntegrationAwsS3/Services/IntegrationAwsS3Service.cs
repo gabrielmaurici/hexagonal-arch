@@ -1,10 +1,8 @@
 using System.Text;
-using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Hexagonal.Arch.Domain.Models;
 using Hexagonal.Arch.Domain.Ports;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace Hexagonal.Arch.Infra.IntegrationAwsS3.Services;
