@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDb(builder.Configuration);
 builder.Services.AddAppicationServices();
 builder.Services.AddIntegrationViaCepApi(builder.Configuration);
-builder.Services.AddIntegrationAwsS3();
+builder.Services.AddIntegrationAwsS3(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

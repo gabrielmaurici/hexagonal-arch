@@ -1,3 +1,4 @@
+using Hexagonal.Arch.Application.Services;
 using Hexagonal.Arch.Domain.Ports;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,5 +7,6 @@ namespace Hexagonal.Arch.Application;
 public static class ApplicationServicesExtensions
 {
     public static IServiceCollection AddAppicationServices(this IServiceCollection services)
-        => services.AddScoped<ICreateCustomerService, CreateCustomerService>();
+        => services.AddScoped<ICreateCustomerService, CreateCustomerService>()
+                   .AddScoped<IGetCustomerService, GetCustomerService>();
 }
