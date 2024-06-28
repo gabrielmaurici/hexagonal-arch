@@ -31,4 +31,18 @@ public class IntegrationAwsS3ServiceTest
         Assert.Equal(addressAwsS3ModelExpect.District, addressAwsS3Model!.District);
         amazonS3Mock.Verify(x => x.GetObjectAsync(It.IsAny<GetObjectRequest>(), It.IsAny<CancellationToken>()), Times.AtMostOnce());
     }
+
+    [Fact(DisplayName = "Should return null when CEP not exists in bucket s3")]
+    public async void CepNotExistsS3_WhenCepNotExistsInS3Bucket_ReturnNull()
+    {
+        var amazonS3Mock = new Mock<IAmazonS3>();
+        amazonS3Mock.Setup(x => x.GetObjectAsync(It.IsAny<GetObjectRequest>(), It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new AmazonS3Exception(""));
+        var integrationAwsS3Service = new IntegrationAwsS3Service(amazonS3Mock.Object);
+
+        var addressAwsS3Model = await integrationAwsS3Service.GetAddressByCepAsync("88999-999");
+        
+        Assert.Null(addressAwsS3Model);
+        amazonS3Mock.Verify(x => x.GetObjectAsync(It.IsAny<GetObjectRequest>(), It.IsAny<CancellationToken>()), Times.AtMostOnce());
+    }
 }
