@@ -45,4 +45,17 @@ public class IntegrationAwsS3ServiceTest
         Assert.Null(addressAwsS3Model);
         amazonS3Mock.Verify(x => x.GetObjectAsync(It.IsAny<GetObjectRequest>(), It.IsAny<CancellationToken>()), Times.AtMostOnce());
     }
+    
+    [Fact(DisplayName = "Should create new Address in bucket s3")]
+    public async void AddresIsValid_WhenAddressIsValid_CreateInBucketS3()
+    {
+        var addressAwsS3Model = new AddressAwsS3Model("88999-999", "Rua Teste", "Bairro Teste");
+        var amazonS3Mock = new Mock<IAmazonS3>();
+        amazonS3Mock.Setup(x => x.PutObjectAsync(It.IsAny<PutObjectRequest>(), It.IsAny<CancellationToken>()));
+        var integrationAwsS3Service = new IntegrationAwsS3Service(amazonS3Mock.Object);
+
+        await integrationAwsS3Service.UploadCepAsync(addressAwsS3Model);
+        
+        amazonS3Mock.Verify(x => x.PutObjectAsync(It.IsAny<PutObjectRequest>(), It.IsAny<CancellationToken>()), Times.AtMostOnce());
+    }
 }
