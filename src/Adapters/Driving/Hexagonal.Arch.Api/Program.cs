@@ -6,7 +6,7 @@ using Hexagonal.Arch.Infra.IntegrationAwsS3;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDb(builder.Configuration);
+builder.Services.AddDb();
 builder.Services.AddAppicationServices();
 builder.Services.AddIntegrationViaCepApi(builder.Configuration);
 builder.Services.AddIntegrationAwsS3(builder.Configuration);
