@@ -3,6 +3,7 @@ using Hexagonal.Arch.Infra.Db;
 using Hexagonal.Arch.Application;
 using Hexagonal.Arch.Infra.IntegrationViaCepApi;
 using Hexagonal.Arch.Infra.IntegrationAwsS3;
+using Hexagonal.Arch.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,4 +25,5 @@ if (app.Environment.IsDevelopment())
 
 CustomerEndpoints.RegisterCustomersEndpoints(app);
 app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.Run();

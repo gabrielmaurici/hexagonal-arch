@@ -1,5 +1,5 @@
 namespace Hexagonal.Arch.Domain.Exceptions;
 
-public class CustomerNotFoundException() : NullReferenceException("Cliente não encontrados")
+public class CustomerNotFoundException() : KeyNotFoundException("Cliente não encontrado")
 {
 }
