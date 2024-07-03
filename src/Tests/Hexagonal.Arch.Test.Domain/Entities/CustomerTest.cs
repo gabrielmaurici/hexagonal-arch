@@ -10,10 +10,17 @@ namespace Hexagonal.Arch.Test.Domain.Entities
         public void CustomerValid_WhenCustomerIsValid_ReturnCustomer()
         {
             var cpf = new Cpf("999.999.999-99");
-            var address = new Address("88999-999", "Rua teste", "Bairro teste");
+            var address = new Address("88999-999", "Cidade Teste", "Rua teste", "Bairro teste");
             var id = 0;
             var name = "Joãozinho";
             short? age = 18;
+            var customerToString = $"Nome: {name}" +
+            $"\nIdade: {age}"+
+            $"\nCPF: {cpf.Document}" +
+            $"\nCEP: {address.Cep}"+
+            $"\nCidade: {address.City}"+
+            $"\nRua: {address.Street}"+
+            $"\nBairro: {address.District}";
             
             var customer = new Customer(id, name, age, cpf, address);
     
@@ -24,13 +31,14 @@ namespace Hexagonal.Arch.Test.Domain.Entities
             Assert.Equal(id, customer.Id);
             Assert.Equal(name, customer.Name);
             Assert.Equal(age, customer.Age);
+            Assert.Equal(customerToString, customer.ToString());
         }
 
         [Fact(DisplayName = "Throw null Name exception when Name is null or empty")]
         public void NameIsNullOrEmpty_WhenNameIsNullOrEmpty_ThrowNullNameException()
         {
             var cpf = new Cpf("999.999.999-99");
-            var address = new Address("88999-999", "Rua teste", "Bairro teste");            
+            var address = new Address("88999-999","Cidade teste", "Rua teste", "Bairro teste");            
             var id = 0;
             string? nameNull = null;
             var nameEmpty = string.Empty;

@@ -16,7 +16,7 @@ public class CreateCustomerServiceTest
         var customerRepositoryMock = new Mock<ICustomerRepository>();
         var integrationAwsS3ServiceMock = new Mock<IIntegrationAwsS3Service>();
         integrationAwsS3ServiceMock.Setup(x => x.GetAddressByCepAsync(It.IsAny<string>()))
-            .ReturnsAsync(new AddressAwsS3Model("88999-999", "Rua Teste", "Bairro Teste"));
+            .ReturnsAsync(new AddressAwsS3Model("88999-999", "Cidade Teste", "Rua Teste", "Bairro Teste"));
         var integrationViaCepApiServiceMock = new Mock<IIntegrationViaCepApiService>();
         var customerDto = new CreateCustomerDto("Joãozinho", "999.999.999-99", 18, "88999-999");
         var createCustomerApplication = new CreateCustomerService(
@@ -42,7 +42,7 @@ public class CreateCustomerServiceTest
             .ReturnsAsync((AddressAwsS3Model?)null);
         var integrationViaCepApiServiceMock = new Mock<IIntegrationViaCepApiService>();
         integrationViaCepApiServiceMock.Setup(x => x.GetAddressByCepAsync(It.IsAny<string>()))
-            .ReturnsAsync(new AddressViaCepModel { Cep = "88999-999", Logradouro = "Rua Teste", Bairro = "Bairro Teste"});
+            .ReturnsAsync(new AddressViaCepModel { Cep = "88999-999", Localidade = "Cidade Teste", Logradouro = "Rua Teste", Bairro = "Bairro Teste"});
         var customerDto = new CreateCustomerDto("Joãozinho", "999.999.999-99", 18, "88999-999");
         var createCustomerApplication = new CreateCustomerService(
             customerRepositoryMock.Object,

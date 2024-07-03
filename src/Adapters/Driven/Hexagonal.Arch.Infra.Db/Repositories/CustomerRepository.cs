@@ -18,6 +18,7 @@ public class CustomerRepository(HexagonalContext context) : ICustomerRepository
             customer.Age,
             customer.Cpf.Document,
             customer.Address.Cep,
+            customer.Address.City,
             customer.Address.Street,
             customer.Address.District
         );
@@ -31,7 +32,7 @@ public class CustomerRepository(HexagonalContext context) : ICustomerRepository
             throw new CustomerNotFoundException();
 
         var cpf = new Cpf(customerEfModel.Cpf);
-        var address = new Address(customerEfModel.Cep, customerEfModel.Street, customerEfModel.District);
+        var address = new Address(customerEfModel.Cep, customerEfModel.City, customerEfModel.Street, customerEfModel.District);
         return new Customer(customerEfModel.Id, customerEfModel.Name, customerEfModel.Age, cpf, address);
     }
 }

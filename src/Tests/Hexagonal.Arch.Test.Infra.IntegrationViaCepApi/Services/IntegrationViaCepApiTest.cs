@@ -16,6 +16,7 @@ public class IntegrationViaCepApiTest
         var responseAddresViaCepModel = new AddressViaCepModel
         {
             Cep = "01001-000",
+            Localidade = "São Paulo",
             Logradouro = "Praça da Sé",
             Bairro = "Sé" 
         };
@@ -35,10 +36,11 @@ public class IntegrationViaCepApiTest
         };
         
         var integrationViaCepApiService = new IntegrationViaCepApiService(client);
-        var addressViaCepModel = await integrationViaCepApiService.GetAddressByCep("01001-000");
+        var addressViaCepModel = await integrationViaCepApiService.GetAddressByCepAsync("01001-000");
 
         Assert.Equal(responseAddresViaCepModel.Erro, addressViaCepModel.Erro);
         Assert.Equal(responseAddresViaCepModel.Cep, addressViaCepModel.Cep);
+        Assert.Equal(responseAddresViaCepModel.Localidade, addressViaCepModel.Localidade);
         Assert.Equal(responseAddresViaCepModel.Logradouro, addressViaCepModel.Logradouro);
         Assert.Equal(responseAddresViaCepModel.Bairro, addressViaCepModel.Bairro);
     }
@@ -67,7 +69,7 @@ public class IntegrationViaCepApiTest
         
         var integrationViaCepApiService = new IntegrationViaCepApiService(client);
 
-        await Assert.ThrowsAsync<CepNotFoundException>(() => integrationViaCepApiService.GetAddressByCep("11111-111"));
+        await Assert.ThrowsAsync<CepNotFoundException>(() => integrationViaCepApiService.GetAddressByCepAsync("11111-111"));
     }
 
     [Fact(DisplayName = "When CEP is invalid, return status code 400 and throws InvalidCepFormatException")]
@@ -89,7 +91,7 @@ public class IntegrationViaCepApiTest
         };
         var integrationViaCepApiService = new IntegrationViaCepApiService(client);
 
-        await Assert.ThrowsAsync<InvalidCepFormatException>(() => integrationViaCepApiService.GetAddressByCep("01000"));
+        await Assert.ThrowsAsync<InvalidCepFormatException>(() => integrationViaCepApiService.GetAddressByCepAsync("01000"));
     }
 
     [Fact(DisplayName = "When ViaCepApi is down, return status code 500 and throws Exception")]
@@ -111,7 +113,7 @@ public class IntegrationViaCepApiTest
         };
         var integrationViaCepApiService = new IntegrationViaCepApiService(client);
 
-        var exception = await Assert.ThrowsAsync<Exception>(() => integrationViaCepApiService.GetAddressByCep("01000"));
+        var exception = await Assert.ThrowsAsync<Exception>(() => integrationViaCepApiService.GetAddressByCepAsync("01000"));
         Assert.Equal("Erro ao consultar CEP do cliente", exception.Message);
     }
 }

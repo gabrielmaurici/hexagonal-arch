@@ -33,6 +33,7 @@ public class IntegrationAwsS3Service(IAmazonS3 _client) : IIntegrationAwsS3Servi
         }
         catch (AmazonS3Exception)
         {
+            Console.WriteLine("entrou aqui tbm");
             return null;
         }
     }

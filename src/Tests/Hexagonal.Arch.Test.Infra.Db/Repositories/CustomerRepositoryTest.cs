@@ -16,7 +16,7 @@ public class CustomerRepositoryTest
     {
         var idCustomerInDb = 1;
         var cpf = new Cpf("999.999.999-99");
-        var address = new Address("88999-999", "Rua teste", "Bairro teste");
+        var address = new Address("88999-999", "Cidade teste", "Rua teste", "Bairro teste");
         var customer = CustomerFactory.Create("Joãozinho", 18, cpf, address);
         var contextMock = GetContextMock();
         var customerRepositoryMock = GetCustomerRepositoryMock(contextMock);
@@ -29,6 +29,7 @@ public class CustomerRepositoryTest
         Assert.Equal(customer.Age, customerEfModelDb.Age);
         Assert.Equal(customer.Cpf.Document, customerEfModelDb.Cpf);
         Assert.Equal(customer.Address.Cep, customerEfModelDb.Cep);
+        Assert.Equal(customer.Address.City, customerEfModelDb.City);
         Assert.Equal(customer.Address.Street, customerEfModelDb.Street);
         Assert.Equal(customer.Address.District, customerEfModelDb.District);
     }
@@ -36,7 +37,7 @@ public class CustomerRepositoryTest
     [Fact(DisplayName = "Get customer by id when customer exists in db")]
     public async void CustomerExists_WhenCustomerExistsInDb_GetById()
     {
-        var customerEfModel = new CustomerEfModel(0, "Joãozinho", 18, "999.999.999-99", "88999-999", "Rua teste", "Bairro teste");
+        var customerEfModel = new CustomerEfModel(0, "Joãozinho", 18, "999.999.999-99", "88999-999", "Cidade teste", "Rua teste", "Bairro teste");
         var contextMock = GetContextMock();
         var customerRepositoryMock = GetCustomerRepositoryMock(contextMock);
 
@@ -50,6 +51,7 @@ public class CustomerRepositoryTest
         Assert.Equal(customerEfModel.Age, customerDb.Age);
         Assert.Equal(customerEfModel.Cpf, customerDb.Cpf.Document);
         Assert.Equal(customerEfModel.Cep, customerDb.Address.Cep);
+        Assert.Equal(customerEfModel.City, customerDb.Address.City);
         Assert.Equal(customerEfModel.Street, customerDb.Address.Street);
         Assert.Equal(customerEfModel.District, customerDb.Address.District);
     }

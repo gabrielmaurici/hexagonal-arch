@@ -13,7 +13,7 @@ public class IntegrationAwsS3ServiceTest
     [Fact(DisplayName = "Should return a Address when CEP exists in bucket s3")]
     public async void CepExistsS3_WhenCepExistsInS3Bucket_ReturnAddress()
     {
-        var addressAwsS3ModelExpect = new AddressAwsS3Model("88999-999", "Rua Teste", "Bairro Teste");
+        var addressAwsS3ModelExpect = new AddressAwsS3Model("88999-999", "Cidade Teste", "Rua Teste", "Bairro Teste");
         var jsonAddress = JsonConvert.SerializeObject(addressAwsS3ModelExpect);
         var responseExpect = new GetObjectResponse
         {
@@ -27,6 +27,7 @@ public class IntegrationAwsS3ServiceTest
         var addressAwsS3Model = await integrationAwsS3Service.GetAddressByCepAsync("88999-999");
         
         Assert.Equal(addressAwsS3ModelExpect.Cep, addressAwsS3Model!.Cep);
+        Assert.Equal(addressAwsS3ModelExpect.City, addressAwsS3Model!.City);
         Assert.Equal(addressAwsS3ModelExpect.Street, addressAwsS3Model!.Street);
         Assert.Equal(addressAwsS3ModelExpect.District, addressAwsS3Model!.District);
         amazonS3Mock.Verify(x => x.GetObjectAsync(It.IsAny<GetObjectRequest>(), It.IsAny<CancellationToken>()), Times.AtMostOnce());
@@ -49,7 +50,7 @@ public class IntegrationAwsS3ServiceTest
     [Fact(DisplayName = "Should create new Address in bucket s3")]
     public async void AddresIsValid_WhenAddressIsValid_CreateInBucketS3()
     {
-        var addressAwsS3Model = new AddressAwsS3Model("88999-999", "Rua Teste", "Bairro Teste");
+        var addressAwsS3Model = new AddressAwsS3Model("88999-999", "Cidade Teste", "Rua Teste", "Bairro Teste");
         var amazonS3Mock = new Mock<IAmazonS3>();
         amazonS3Mock.Setup(x => x.PutObjectAsync(It.IsAny<PutObjectRequest>(), It.IsAny<CancellationToken>()));
         var integrationAwsS3Service = new IntegrationAwsS3Service(amazonS3Mock.Object);

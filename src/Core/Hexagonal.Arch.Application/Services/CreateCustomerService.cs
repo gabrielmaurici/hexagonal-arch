@@ -21,14 +21,14 @@ public class CreateCustomerService(
         if (addressAwsS3Cache == null) 
         {
             var addressViaCep = await integrationViaCepApiService.GetAddressByCepAsync(customerDto.Cep);
-            var adressAwsS3Model = new AddressAwsS3Model(addressViaCep.Cep!, addressViaCep.Logradouro!, addressViaCep.Bairro!);
+            var adressAwsS3Model = new AddressAwsS3Model(addressViaCep.Cep!, addressViaCep.Localidade!, addressViaCep.Logradouro!, addressViaCep.Bairro!);
             await integrationAwsS3Service.UploadCepAsync(adressAwsS3Model);
 
-            address = new(addressViaCep.Cep!, addressViaCep.Logradouro, addressViaCep.Bairro);
+            address = new(addressViaCep.Cep!, addressViaCep.Localidade, addressViaCep.Logradouro, addressViaCep.Bairro);
         }
         else
         {
-            address = new(addressAwsS3Cache.Cep, addressAwsS3Cache.Street, addressAwsS3Cache.District);
+            address = new(addressAwsS3Cache.Cep, addressAwsS3Cache.City, addressAwsS3Cache.Street, addressAwsS3Cache.District);
         }
 
         var cpf = new Cpf(customerDto.Cpf);

@@ -9,12 +9,14 @@ namespace Hexagonal.Arch.Test.Domain.ValueObjects
         public void AddressValid_WhenAddressIsValid_ReturnAddress()
         {
             var cep = "88999-999";
+            var city = "Cidade Teste";
             var street = "Rua Teste";
             var district = "Bairro Teste";
 
-            var address = new Address(cep, street, district);
+            var address = new Address(cep, city, street, district);
 
             Assert.Equal(cep, address.Cep);
+            Assert.Equal(city, address.City);
             Assert.Equal(street, address.Street);
             Assert.Equal(district, address.District);
         }

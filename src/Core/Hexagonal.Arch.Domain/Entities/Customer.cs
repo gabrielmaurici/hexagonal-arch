@@ -32,4 +32,15 @@ public class Customer
         if (Address == null)
             throw new NullAddressException();
     }
+
+    public override string ToString() 
+    {
+        return $"Nome: {Name}" +
+            $"\nIdade: {Age}"+
+            $"\nCPF: {Cpf.Document}" +
+            $"\nCEP: {Address.Cep}"+
+            $"\nCidade: {Address.City}"+
+            $"\nRua: {Address.Street}"+
+            $"\nBairro: {Address.District}";
+    }
 }

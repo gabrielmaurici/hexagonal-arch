@@ -6,7 +6,7 @@ namespace Hexagonal.Arch.Application;
 
 public static class ApplicationServicesExtensions
 {
-    public static IServiceCollection AddAppicationServices(this IServiceCollection services)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         => services.AddScoped<ICreateCustomerService, CreateCustomerService>()
                    .AddScoped<IGetCustomerService, GetCustomerService>();
 }
